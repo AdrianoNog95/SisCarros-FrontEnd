@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'mdb-angular-ui-kit/assets/scss/mdb' as *;
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+
+.centralizar{
+    text-align: center;
+}
+
+.direita{
+    text-align: right;
+}
+
+body {
+    background-color: gray;
+}

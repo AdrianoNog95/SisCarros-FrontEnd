@@ -1,0 +1,73 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card"><!--Este card que está fornecendo essa tela cinza no fundo-->
+                <div class="card-body">
+
+                    <h3>Listagem de carros</h3>
+                    <div class="direita">
+                    
+                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="new()">Novo</button>    
+                        
+                    <!--<button type="button" class="btn btn-primary btn-rounded" mdbRipple [routerLink]="['/admin/carros/new']">Novo</button>-->
+                    </div>
+                    <br>
+                    <table border="2" class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (carro of lista; track $index){
+                            <tr>
+                                <td>{{carro.id}}</td>
+                                <td>{{carro.nome}}</td>
+                                <td class="direita">
+                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(carro)">Editar</button>
+                                    <button type="button" class="btn btn-danger btn-rounded" mdbRipple (click)="deleteById(carro)">Deletar</button>        
+                                </td>    
+                            </tr>
+                        } 
+                        </tbody>
+                    </table>
+                
+                </div>
+            </div>        
+
+        </div>
+    </div> 
+</div>  
+
+
+
+
+
+
+<ng-template #modalCarroDetalhe>
+<!--Essa tag está isolando a div abaixo, 
+    ou seja, evita que seja rederizado na tela enquanto
+    não houver chamada do usuário-->
+
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Cadastro</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+
+    <app-carrosdetails [carro]="carroEdit" (retorno)="retornoDetalhe($event)"></app-carrosdetails>
+    
+    
+    
+    
+</div>
+</ng-template>
