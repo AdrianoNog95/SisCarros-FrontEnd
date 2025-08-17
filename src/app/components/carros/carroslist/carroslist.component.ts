@@ -1,10 +1,10 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { Carro } from '../../../models/carro';
-import { CarroService } from '../../../services/carro.service';
 import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CarrosdetailsComponent } from '../carrosdetails/carrosdetails.component';
+import { CarroService } from '../../../services/carro.service';
 
 @Component({
   selector: 'app-carroslist',
@@ -15,7 +15,7 @@ import { CarrosdetailsComponent } from '../carrosdetails/carrosdetails.component
 })
 export class CarroslistComponent {
   lista: Carro[] = [];
-  carroEdit: Carro = new Carro(0,"");
+  carroEdit: Carro = new Carro(0,"", null);
   
 
   //ELEMENTOS DA JANELA MODAL
@@ -101,13 +101,11 @@ export class CarroslistComponent {
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
-  edit(carro:Carro){
-    
+  edit(carro: Carro){
     //Essa linha de código evita referência de objeto, através de clonagem.
     //Ou seja, impede que um texto numa grid seja alterado
     //se o usuário sair sem confirmar a edição. 
     this.carroEdit = Object.assign({}, carro); 
-    
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
