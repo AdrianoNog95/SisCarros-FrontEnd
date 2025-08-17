@@ -28,8 +28,13 @@
                                 <td>{{marca.id}}</td>
                                 <td>{{marca.nome}}</td>
                                 <td class="direita">
-                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(marca)">Editar</button>
-                                    <button type="button" class="btn btn-danger btn-rounded" mdbRipple (click)="deleteById(marca)">Deletar</button>        
+                                    @if (esconderBotoes) {
+                                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="select(marca)">Selecionar</button>    
+                                    }@else{
+                                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="edit(marca)">Editar</button>
+                                        <button type="button" class="btn btn-danger btn-rounded" mdbRipple (click)="deleteById(marca)">Deletar</button>        
+                                        }
+                                
                                 </td>    
                             </tr>
                         } 

@@ -110,7 +110,8 @@ export class CarrosdetailsComponent {
 
 
   retornoMarca(marca: Marca){
-
+    this.carro.marca = marca;
+    this.modalRef.close();
   }
 
 

@@ -116,7 +116,11 @@ export class MarcaslistComponent {
     this.listAll();      
     this.modalRef.close();
 
-  } 
+  }
+  
+  select(marca: Marca){
+    this.retorno.emit(marca);
+  }
 
 }  
 

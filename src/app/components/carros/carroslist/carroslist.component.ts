@@ -97,7 +97,7 @@ export class CarroslistComponent {
   }
 
   new(){
-    this.carroEdit = new Carro(0,"");
+    this.carroEdit = new Carro(0,"", null);
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
