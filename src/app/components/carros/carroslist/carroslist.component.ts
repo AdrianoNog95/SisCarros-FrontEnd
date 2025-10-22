@@ -15,7 +15,7 @@ import { CarroService } from '../../../services/carro.service';
 })
 export class CarroslistComponent {
   lista: Carro[] = [];
-  carroEdit: Carro = new Carro(0,"", null);
+  carroEdit: Carro = new Carro(0,"");
   
 
   //ELEMENTOS DA JANELA MODAL
@@ -97,7 +97,7 @@ export class CarroslistComponent {
   }
 
   new(){
-    this.carroEdit = new Carro(0,"", null);
+    this.carroEdit = new Carro(0,"");
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
