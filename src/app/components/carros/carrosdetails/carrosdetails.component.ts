@@ -124,13 +124,17 @@ export class CarrosdetailsComponent {
 
 
   retornoAcessorio(acessorio: Acessorio){
-    alert('selecionado acessorio: '+acessorio.nome);
+    if(this.carro.acessorios == null)
+      this.carro.acessorios = [];
+
+    this.carro.acessorios.push(acessorio);
     this.modalRef.close();
   }  
 
 
   desvincularAcessorioCarro(acessorio: Acessorio){
-
+    let posicao = this.carro.acessorios.findIndex(x => {return x.id == acessorio.id});
+    this.carro.acessorios.splice(posicao, 1);
   }
 
 }
