@@ -16,7 +16,7 @@ import { MarcaslistComponent } from '../../marcas/marcaslist/marcaslist.componen
 })
 export class MarcasdetailsComponent {
 
-  @Input("marca") marca: Marca = new Marca(0,"", undefined);
+  @Input("marca") marca: Marca = new Marca(0,"");
   @Output("retorno") retorno = new EventEmitter<any>();
   router = inject(ActivatedRoute);
   router2 = inject(Router);

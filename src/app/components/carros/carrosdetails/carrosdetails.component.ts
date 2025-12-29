@@ -19,7 +19,7 @@ import { AcessorioslistComponent } from '../../acessorios/acessorioslist/acessor
 })
 export class CarrosdetailsComponent {
 
-  @Input("carro") carro: Carro = new Carro(0,"");
+  @Input("carro") carro: Carro = new Carro();
   @Output("retorno") retorno = new EventEmitter<any>();
   router = inject(ActivatedRoute);
   router2 = inject(Router);
@@ -57,9 +57,9 @@ export class CarrosdetailsComponent {
       
   
   save() {
-    if (this.carro.id > 0){
+    if (typeof this.carro.id === 'number' && this.carro.id > 0) {
       
-      this.carroService.update(this.carro, this.carro.id).subscribe({
+      this.carroService.update(this.carro, this.carro.id!).subscribe({
         next: mensagem => {
           Swal.fire({
             title: mensagem,

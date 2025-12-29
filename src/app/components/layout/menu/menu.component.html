@@ -1,66 +1,39 @@
 <!-- Navbar -->
 <nav class="navbar" data-mdb-theme="light" style="background-color: lightblue;">
-  <!-- Container wrapper -->
+  
   <div class="container-fluid">
-    <!-- Navbar brand -->
     <a class="navbar-brand" href="/">SISTEMA DE CARROS</a>
-    
-
-    <!-- Toggle button -->
     <button
       class="navbar-toggler"
       type="button"
       (click)="basicNavbar.toggle()"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Collapsible wrapper -->
-    <div
-      class="collapse navbar-collapse"
+  
+  <div class="collapse navbar-collapse"
       id="navbarSupportedContent"
       mdbCollapse
-      #basicNavbar="mdbCollapse"
-    >
-      <!-- Left links -->
+      #basicNavbar="mdbCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
-        @if(loginService.hasPermission("ADMIN")){
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="admin/carros">Carros</a>
         </li>
-        }  
-        
-        @if(loginService.hasPermission("USER")){
+                  
         <li class="nav-item">
           <a class="nav-link active" href="admin/marcas">Marcas</a>
         </li>
-      }
-
-        @if(loginService.hasPermission("USER") || loginService.hasPermission("ADMIN")){
+      
         <li class="nav-item">
           <a class="nav-link active" href="admin/acessorios">Acessórios</a>
         </li>
-      }  
-
+      
         <li class="nav-item">
           <a class="nav-link active" href="login">Sair</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link active" href="">{{usuario.username}}</a>
-        </li>
-        
-      </ul>
-      <!-- Left links -->
-
-      <!-- Search form -->
-      
+        </li>   
+      </ul>      
     </div>
-    <!-- Collapsible wrapper -->
   </div>
-  <!-- Container wrapper -->
 </nav>
-<!-- Navbar -->
