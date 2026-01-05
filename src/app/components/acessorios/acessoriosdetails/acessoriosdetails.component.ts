@@ -5,8 +5,6 @@ import { Acessorio } from '../../../models/acessorio';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { AcessorioService } from '../../../services/acessorio.service';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-
 
 
 @Component({

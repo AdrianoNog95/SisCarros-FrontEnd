@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { RouterLink } from "@angular/router";
 
 
 @Component({
   selector: 'app-menu',
-  imports: [MdbCollapseModule],
+  imports: [MdbCollapseModule, RouterLink],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
