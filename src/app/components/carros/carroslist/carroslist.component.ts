@@ -15,7 +15,7 @@ import { CarroService } from '../../../services/carro.service';
 })
 export class CarroslistComponent {
   lista: Carro[] = [];
-  carroEdit: Carro = new Carro(0,"");
+  carroEdit: Carro = new Carro("");
   
 
   //ELEMENTOS DA JANELA MODAL
@@ -71,6 +71,7 @@ export class CarroslistComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
+        if (!carro.id) return;
         this.carroService.delete(carro.id).subscribe({
           next: mensagem => {//quando o back retornar o que se espera
             Swal.fire({
@@ -96,8 +97,8 @@ export class CarroslistComponent {
     });
   }
 
-  new(){
-    this.carroEdit = new Carro(0,"");
+  abrirNovo(){
+    this.carroEdit = new Carro("");
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 

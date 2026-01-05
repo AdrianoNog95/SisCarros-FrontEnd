@@ -8,13 +8,14 @@ import { MarcaService } from '../../../services/marca.service';
 
 @Component({
   selector: 'app-marcaslist',
+  standalone: true,
   imports: [HttpClientModule, MdbModalModule, MarcasdetailsComponent],
   templateUrl: './marcaslist.component.html',
-  styleUrl: './marcaslist.component.scss'
+  styleUrls: ['./marcaslist.component.scss']
 })
 export class MarcaslistComponent {
   lista: Marca[] = [];
-  marcaEdit: Marca = new Marca(0,"");
+  marcaEdit: Marca = new Marca("");
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;  
   @Output("retorno") retorno = new EventEmitter<any>();
@@ -62,44 +63,39 @@ export class MarcaslistComponent {
 
 
   deleteById(marca: Marca){
-    Swal.fire({
-      title: 'Tem certeza que deseja deletar este registro?',
-      icon: 'warning',
-      showConfirmButton: true,
-      showDenyButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.marcaService.delete(marca.id).subscribe({
-          next: mensagem => {//quando o back retornar o que se espera
-            Swal.fire({
-              title: mensagem,
-              icon: 'success',
-              confirmButtonText: 'Ok',
+  Swal.fire({
+    title: 'Tem certeza que deseja deletar este registro?',
+    icon: 'warning',
+    showConfirmButton: true,
+    showDenyButton: true,
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não',
+  }).then((result) => {
+    if (result.isConfirmed && marca.id !== undefined) {
+      this.marcaService.delete(marca.id).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            icon: 'success',
+            confirmButtonText: 'Ok',
           });
-          
           this.listAll();
-
         },
         error: erro => {
           Swal.fire({
-              title: 'Ocorreu um erro',
-              icon: 'error',
-              confirmButtonText: 'Ok'
-          });    
-
-       }
+            title: 'Ocorreu um erro',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
       });
+    }
+  });
+}
+  
 
-        
-      }
-    });
-  }
-
-  new(){
-    this.marcaEdit = new Marca(0,"");
+  novo(){
+    this.marcaEdit = new Marca("");
     this.modalRef = this.modalService.open(this.modalMarcaDetalhe);
   }
 

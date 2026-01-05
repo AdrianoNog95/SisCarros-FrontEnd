@@ -13,7 +13,8 @@
                     <br/>
                     
                     <div>
-                        @if(acessorio.id > 0){
+                        @if(acessorio.id !== undefined && acessorio.id > 0){
+
                     <!--    <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarMarca()">Buscar Marca</button>                    
                         }@else{
                             <span class="text-primary">Marca: {{carro.marca.nome}}</span>
@@ -29,27 +30,3 @@
     </div>           
 </div>
 
-
-
-
-<ng-template #modalAcessorios>
-<!--Essa tag está isolando a div abaixo, 
-    ou seja, evita que seja rederizado na tela enquanto
-    não houver chamada do usuário-->
-
-<div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Cadastro</h5>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="modalRef.close()"
-  ></button>
-</div>
-<div class="modal-body">
-
-    
-        
-</div>
-
-</ng-template>

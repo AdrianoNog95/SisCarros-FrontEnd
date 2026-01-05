@@ -5,27 +5,23 @@ import { Marca } from '../../../models/marca';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { MarcaService } from '../../../services/marca.service';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { MarcaslistComponent } from '../../marcas/marcaslist/marcaslist.component';
+
+
 
 @Component({
   selector: 'app-marcasdetails',
-  imports: [MdbFormsModule, FormsModule, MarcaslistComponent],
+  imports: [MdbFormsModule, FormsModule],
   templateUrl: './marcasdetails.component.html',
   styleUrl: './marcasdetails.component.scss'
 })
 export class MarcasdetailsComponent {
 
-  @Input("marca") marca: Marca = new Marca(0,"");
+  @Input("marca") marca: Marca = new Marca("");
   @Output("retorno") retorno = new EventEmitter<any>();
   router = inject(ActivatedRoute);
   router2 = inject(Router);
 
-  //ELEMENTOS DA JANELA MODAL
-  modalService = inject(MdbModalService);
-  @ViewChild("modalMarcas") modalMarcas!: TemplateRef<any>;
-  modalRef!: MdbModalRef<any>;
-
+  
   marcaService = inject(MarcaService);
 formulario: any;
 
@@ -54,9 +50,10 @@ formulario: any;
       
   
   save() {
-    if (this.marca.id > 0){
+    if (this.marca.id !== undefined && this.marca.id > 0) {
+
       
-      this.marcaService.update(this.marca, this.marca.id).subscribe({
+      this.marcaService.update(this.marca, this.marca.id!).subscribe({
         next: mensagem => {
           Swal.fire({
             title: mensagem,

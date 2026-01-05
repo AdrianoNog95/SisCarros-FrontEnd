@@ -17,16 +17,12 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 })
 export class AcessoriosdetailsComponent {
 
-  @Input("acessorio") acessorio: Acessorio = new Acessorio(0,"");
+  @Input("acessorio") acessorio: Acessorio = new Acessorio('');
   @Output("retorno") retorno = new EventEmitter<any>();
   router = inject(ActivatedRoute);
   router2 = inject(Router);
 
-  //ELEMENTOS DA JANELA MODAL
-  modalService = inject(MdbModalService);
-  @ViewChild("modalAcessorios") modalAcessorios!: TemplateRef<any>;
-  modalRef!: MdbModalRef<any>;
-
+  
   acessorioService = inject(AcessorioService);
 formulario: any;
 
@@ -55,7 +51,7 @@ formulario: any;
       
   
   save() {
-    if (this.acessorio.id > 0){
+    if (this.acessorio.id !== undefined){
       
       this.acessorioService.update(this.acessorio, this.acessorio.id).subscribe({
         next: mensagem => {

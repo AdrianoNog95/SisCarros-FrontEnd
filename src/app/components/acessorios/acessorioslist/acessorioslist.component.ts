@@ -14,43 +14,44 @@ import { AcessorioService } from '../../../services/acessorio.service';
   styleUrls: ['./acessorioslist.component.scss']
 })
 export class AcessorioslistComponent {
+
   lista: Acessorio[] = [];
-  acessorioEdit: Acessorio = new Acessorio(0,"");
+  acessorioEdit: Acessorio = new Acessorio("");
 
   @Input("esconderBotoes") esconderBotoes: boolean = false;  
-  @Output("retorno") retorno = new EventEmitter<any>();
-  
-  //ELEMENTOS DA JANELA MODAL
+  @Output("retorno") retorno = new EventEmitter<Acessorio>();
+
   modalService = inject(MdbModalService);
   @ViewChild("modalAcessorioDetalhe") modalAcessorioDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
   acessorioService = inject(AcessorioService);
 
-  constructor(){
+  constructor() {
     this.listAll();
 
-    let acessorioNovo = history.state.acessorioNovo;
-    let acessorioEditado = history.state.acessorioEditado;
+    const acessorioNovo = history.state.acessorioNovo;
+    const acessorioEditado = history.state.acessorioEditado;
 
-    if(acessorioNovo != null){
-        acessorioNovo.id = 555;
-        this.lista.push(acessorioNovo);
+    if (acessorioNovo != null) {
+      acessorioNovo.id = 555;
+      this.lista.push(acessorioNovo);
     }
-    
-    
-    if(acessorioEditado !=null){
-      let indice = this.lista.findIndex(x => {return x.id == acessorioEditado.id});
-      this.lista[indice] = acessorioEditado;
+
+    if (acessorioEditado != null) {
+      const indice = this.lista.findIndex(x => x.id === acessorioEditado.id);
+      if (indice >= 0) {
+        this.lista[indice] = acessorioEditado;
+      }
     }
   }
-  
-  listAll(){
+
+  listAll() {
     this.acessorioService.listAll().subscribe({
-      next: lista => {//quando o back retornar o que se espera
+      next: lista => {
         this.lista = lista;
       },
-      error: erro => {
+      error: () => {
         Swal.fire({
           title: 'Ocorreu um erro',
           icon: 'error',
@@ -58,66 +59,61 @@ export class AcessorioslistComponent {
         });
       }
     });
-  }        
+  }
 
+  deleteById(acessorio: Acessorio) {
+  if (acessorio.id == null) {
+    return;
+  }
 
-  deleteById(acessorio: Acessorio){
-    Swal.fire({
-      title: 'Tem certeza que deseja deletar este registro?',
-      icon: 'warning',
-      showConfirmButton: true,
-      showDenyButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
-    }).then((result) => {
-      if (result.isConfirmed) {
+  const id: number = acessorio.id;
 
-        this.acessorioService.delete(acessorio.id).subscribe({
-          next: mensagem => {//quando o back retornar o que se espera
-            Swal.fire({
-              title: mensagem,
-              icon: 'success',
-              confirmButtonText: 'Ok',
+  Swal.fire({
+    title: 'Tem certeza que deseja deletar este registro?',
+    icon: 'warning',
+    showConfirmButton: true,
+    showDenyButton: true,
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.acessorioService.delete(id).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            icon: 'success',
+            confirmButtonText: 'Ok',
           });
           this.listAll();
-
         },
-        error: erro => {
+        error: () => {
           Swal.fire({
-              title: 'Ocorreu um erro',
-              icon: 'error',
-              confirmButtonText: 'Ok'
-          });    
-
-       }
+            title: 'Ocorreu um erro',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
       });
+    }
+  });
+}
 
-        
-      }
-    });
-  }
-
-  new(){
-    this.acessorioEdit = new Acessorio(0,"");
+  abrirNovo() {
+    this.acessorioEdit = new Acessorio("");
     this.modalRef = this.modalService.open(this.modalAcessorioDetalhe);
   }
 
-  edit(acessorio: Acessorio){
-    //Essa linha de código evita referência de objeto, através de clonagem.
-    //Ou seja, impede que um texto numa grid seja alterado
-    //se o usuário sair sem confirmar a edição. 
-    this.acessorioEdit = Object.assign({}, acessorio); 
+  edit(acessorio: Acessorio) {
+    this.acessorioEdit = Object.assign({}, acessorio);
     this.modalRef = this.modalService.open(this.modalAcessorioDetalhe);
   }
 
-
-  retornoDetalhe(acessorio: Acessorio){
-    this.listAll();      
+  retornoDetalhe(acessorio: Acessorio) {
+    this.listAll();
     this.modalRef.close();
   }
-  
-  
-  select(acessorio: Acessorio){
+
+  select(acessorio: Acessorio) {
     this.retorno.emit(acessorio);
-  }  
-}    
+  }
+}
