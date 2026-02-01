@@ -3,18 +3,21 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Login } from '../../../models/login';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-login',
-  imports: [MdbFormsModule, FormsModule],
+  imports: [MdbFormsModule, FormsModule, HttpClientModule],
+ 
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   login: Login = new Login();
-
-  router = inject(Router);
+  private http = inject(HttpClient);
+  private router = inject(Router);
   
 
   constructor() {
@@ -22,10 +25,12 @@ export class LoginComponent {
   }
 
   logar() {
-    if (this.login.username == 'admin' && this.login.password == 'admin') {
-      this.router.navigate(['/admin/carros']);
-        }else
-          alert('Usuário ou senha incorretos!');
-  }    
-      
+    this.http.post(
+      'http://localhost:8080/api/usuario/login',
+      this.login
+    ).subscribe({
+      next: () => this.router.navigate(['/admin/carros']),
+      error: () => alert('Usuário ou senha incorretos')
+    });
+  }
 }
