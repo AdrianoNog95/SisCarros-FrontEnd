@@ -2,9 +2,10 @@
 <nav class="navbar navbar-expand-lg"
      data-mdb-theme="light"
      style="background-color: lightblue;">
-  
+
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">SISTEMA DE CARROS</a>
+    <a class="navbar-brand">SISTEMA DE CARROS</a>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -13,29 +14,44 @@
       aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-  
-  <div class="collapse navbar-collapse"
-      id="navbarSupportedContent"
-      mdbCollapse
-      #basicNavbar="mdbCollapse">
+
+    <div class="collapse navbar-collapse"
+         id="navbarSupportedContent"
+         mdbCollapse
+         #basicNavbar="mdbCollapse">
+
+      <!-- MENU À ESQUERDA -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/admin/carros">Carros</a>
+          <a class="nav-link fw-bold" routerLink="/admin/carros">Carros</a>
         </li>
-                  
+
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/admin/marcas">Marcas</a>
+          <a class="nav-link fw-bold" routerLink="/admin/marcas">Marcas</a>
         </li>
-      
+
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/admin/acessorios">Acessórios</a>
+          <a class="nav-link fw-bold" routerLink="/admin/acessorios">Acessórios</a>
         </li>
-      
+      </ul>
+
+      <!-- ÁREA À DIREITA -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+        <li class="nav-item" *ngIf="username">
+          <span class="nav-link fw-bold">
+            Usuário logado: {{ username }}
+          </span>
+        </li>
+
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/login">Sair</a>
-        </li>   
-      </ul>      
+          <a class="nav-link" (click)="logout()" style="cursor: pointer;">
+            Sair
+          </a>
+        </li>
+
+      </ul>
+
     </div>
   </div>
 </nav>
