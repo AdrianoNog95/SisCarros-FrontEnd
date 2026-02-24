@@ -77,11 +77,9 @@ export class CarrosdetailsComponent {
         });       
       }
     });      
-      
-         
+              
     }else{
       
-
       this.carroService.save(this.carro).subscribe({
         next: mensagem => {
           Swal.fire({
@@ -116,12 +114,10 @@ export class CarrosdetailsComponent {
     this.modalRef = this.modalService.open(this.modalAcessorios, {modalClass: 'modal-lg'});
   }
 
-
   retornoMarca(marca: Marca){
     this.carro.marca = marca;
     this.modalRef.close();
   }
-
 
   retornoAcessorio(acessorio: Acessorio){
     if(this.carro.acessorios == null)
@@ -131,10 +127,11 @@ export class CarrosdetailsComponent {
     this.modalRef.close();
   }  
 
-
   desvincularAcessorioCarro(acessorio: Acessorio){
     let posicao = this.carro.acessorios.findIndex(x => {return x.id == acessorio.id});
     this.carro.acessorios.splice(posicao, 1);
   }
 
+
+  
 }

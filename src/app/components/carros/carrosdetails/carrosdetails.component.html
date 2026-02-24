@@ -7,7 +7,7 @@
                     <h3>Cadastro de carro:</h3>
                     <br>
                     <mdb-form-control>
-                            <input mdbInput type="text" class="form-control" [(ngModel)]="carro.nome"/>
+                            <input mdbInput type="text" id="usuario" class="form-control" [(ngModel)]="carro.nome"/>
                             <label mdbLabel class="form-label" for="nome">Nome:</label>
                     </mdb-form-control>
                     <br/>
@@ -27,16 +27,12 @@
                     </div>
                     <br/>
                     
-
-
+                    
                     <div>
                         <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarAcessorio()">
                             Buscar Acessório
-                        </button> 
-                        
+                        </button>                        
                         <br>
-
-
 
                         <table border="2" class="table">
                         <thead class="table-dark">
@@ -60,9 +56,6 @@
                             }  
                         </tbody>
                     </table>
-
-
-
                 </div>
 
                     <br/><br/>
@@ -74,7 +67,6 @@
         </div>
     </div>           
 </div>
-
 
 <ng-template #modalMarcas>
     <div class="modal-header">

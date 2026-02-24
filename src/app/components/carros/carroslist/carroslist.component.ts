@@ -44,6 +44,7 @@ export class CarroslistComponent {
     }
   }
   
+
   listAll(){
     this.carroService.listAll().subscribe({
       next: lista => {//quando o back retornar o que se espera
@@ -97,10 +98,12 @@ export class CarroslistComponent {
     });
   }
 
+
   abrirNovo(){
     this.carroEdit = new Carro("");
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
+
 
   edit(carro: Carro){
     //Essa linha de código evita referência de objeto, através de clonagem.
@@ -110,7 +113,7 @@ export class CarroslistComponent {
     this.modalRef = this.modalService.open(this.modalCarroDetalhe);
   }
 
-
+  
   retornoDetalhe(carro: Carro){
     this.listAll();      
     this.modalRef.close();

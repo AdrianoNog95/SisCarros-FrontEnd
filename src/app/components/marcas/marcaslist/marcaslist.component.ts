@@ -27,7 +27,6 @@ export class MarcaslistComponent {
 
   marcaService = inject(MarcaService);
 
-
   constructor(){
     this.listAll();
 
@@ -45,6 +44,7 @@ export class MarcaslistComponent {
       this.lista[indice] = marcaEditado;
     }
   }
+  
   
   listAll(){
     this.marcaService.listAll().subscribe({
